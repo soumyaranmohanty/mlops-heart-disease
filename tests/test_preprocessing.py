@@ -1,16 +1,16 @@
-# Tests for data preprocessing
+import pandas as pd
 
-import unittest
+def test_data_schema():
+    df = pd.read_csv("data/processed/heart_disease_cleaned.csv")
 
-class TestPreprocessing(unittest.TestCase):
-    
-    def test_preprocess_data(self):
-        """Test data preprocessing"""
-        pass
-    
-    def test_clean_data(self):
-        """Test data cleaning"""
-        pass
+    expected_columns = {
+        "age","sex","cp","trestbps","chol","fbs","restecg",
+        "thalach","exang","oldpeak","slope","ca","thal","target"
+    }
 
-if __name__ == "__main__":
-    unittest.main()
+    assert set(df.columns) == expected_columns
+
+
+def test_no_missing_values():
+    df = pd.read_csv("data/processed/heart_disease_cleaned.csv")
+    assert df.isnull().sum().sum() == 0

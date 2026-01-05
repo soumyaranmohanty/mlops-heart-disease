@@ -1,6 +1,5 @@
-import pandas as pd
-import sklearn
-import mlflow
-import fastapi
-
-print("Environment setup successful!")
+def test_environment_imports():
+    import pandas
+    import sklearn
+    import mlflow
+    import fastapi
