@@ -104,3 +104,38 @@ mlflow.sklearn.log_model(model_rf, "Random_Forest_model")
 mlflow.end_run()
 
 
+
+
+# ---- Model Selection Logic ----
+
+def select_best_model(metrics_lr, metrics_rf):
+    # Primary metric
+    if abs(metrics_rf["roc_auc"] - metrics_lr["roc_auc"]) > 0.02:
+        return ("RandomForest", model_rf) if metrics_rf["roc_auc"] > metrics_lr["roc_auc"] else ("LogisticRegression", model_lr)
+
+    # Secondary metric: Recall
+    if metrics_rf["recall"] != metrics_lr["recall"]:
+        return ("RandomForest", model_rf) if metrics_rf["recall"] > metrics_lr["recall"] else ("LogisticRegression", model_lr)
+
+    # Tertiary metric: Precision
+    if metrics_rf["precision"] != metrics_lr["precision"]:
+        return ("RandomForest", model_rf) if metrics_rf["precision"] > metrics_lr["precision"] else ("LogisticRegression", model_lr)
+
+    # Fallback: Accuracy
+    return ("RandomForest", model_rf) if metrics_rf["accuracy"] > metrics_lr["accuracy"] else ("LogisticRegression", model_lr)
+
+
+best_model_name, best_model = select_best_model(metrics_lr, metrics_rf)
+
+print(f"Selected best model: {best_model_name}")
+
+
+import pickle
+import os
+
+os.makedirs("artifacts", exist_ok=True)
+
+with open("artifacts/final_model.pkl", "wb") as f:
+    pickle.dump(best_model, f)
+
+print("Final model saved to artifacts/final_model.pkl")
