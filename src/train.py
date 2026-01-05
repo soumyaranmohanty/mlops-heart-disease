@@ -133,9 +133,10 @@ print(f"Selected best model: {best_model_name}")
 import pickle
 import os
 
-os.makedirs("artifacts", exist_ok=True)
+model_dir = os.path.join(os.getcwd(), 'artifacts')
+os.makedirs(model_dir, exist_ok=True)
 
-with open("artifacts/final_model.pkl", "wb") as f:
+with open(os.path.join(model_dir, "final_model.pkl"), "wb") as f:
     pickle.dump(best_model, f)
 
 print("Final model saved to artifacts/final_model.pkl")
