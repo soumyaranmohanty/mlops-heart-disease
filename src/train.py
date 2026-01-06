@@ -2,7 +2,7 @@ import mlflow
 import mlflow.sklearn
 import pandas as pd
 import numpy as np
-
+import os
 from sklearn.model_selection import train_test_split, cross_validate
 from sklearn.compose import ColumnTransformer
 from sklearn.preprocessing import StandardScaler
@@ -33,6 +33,9 @@ preprocessor = ColumnTransformer(
     ]
 )
 
+# mlflow.set_tracking_uri(f"file://{os.getcwd()}/mlruns")
+mlflow.set_tracking_uri(f"sqlite:///mlflow.db")
+
 mlflow.end_run()
 
 mlflow.set_experiment("Heart Disease Classification")
@@ -46,29 +49,29 @@ with mlflow.start_run(run_name="Logistic_Regression"):
     ])
 
 
-scoring = ["accuracy", "precision", "recall", "roc_auc"]
+    scoring = ["accuracy", "precision", "recall", "roc_auc"]
 
-cv_results_lr = cross_validate(
-    model_lr, X, y, cv=5, scoring=scoring
-)
+    cv_results_lr = cross_validate(
+        model_lr, X, y, cv=5, scoring=scoring
+    )
 
-metrics_lr = {
-    "accuracy": np.mean(cv_results_lr["test_accuracy"]),
-    "precision": np.mean(cv_results_lr["test_precision"]),
-    "recall": np.mean(cv_results_lr["test_recall"]),
-    "roc_auc": np.mean(cv_results_lr["test_roc_auc"])
-}
-
-
-mlflow.log_param("model_type", "LogisticRegression")
-mlflow.log_param("max_iter", 1000)
-
-for k, v in metrics_lr.items():
-    mlflow.log_metric(k, v)
+    metrics_lr = {
+        "accuracy": np.mean(cv_results_lr["test_accuracy"]),
+        "precision": np.mean(cv_results_lr["test_precision"]),
+        "recall": np.mean(cv_results_lr["test_recall"]),
+        "roc_auc": np.mean(cv_results_lr["test_roc_auc"])
+    }
 
 
-model_lr.fit(X, y)
-mlflow.sklearn.log_model(model_lr, "logistic_regression_model")
+    mlflow.log_param("model_type", "LogisticRegression")
+    mlflow.log_param("max_iter", 1000)
+
+    for k, v in metrics_lr.items():
+        mlflow.log_metric(k, v)
+
+
+    model_lr.fit(X, y)
+    mlflow.sklearn.log_model(sk_model= model_lr, name="logistic_regression_model")
 mlflow.end_run()
 
 with mlflow.start_run(run_name="Random_Forest"):
@@ -82,25 +85,25 @@ with mlflow.start_run(run_name="Random_Forest"):
     ])
 
 
-cv_results_rf = cross_validate(
-    model_rf, X, y, cv=5, scoring=scoring
-)
+    cv_results_rf = cross_validate(
+        model_rf, X, y, cv=5, scoring=scoring
+    )
 
-metrics_rf = {
-    "accuracy": np.mean(cv_results_rf["test_accuracy"]),
-    "precision": np.mean(cv_results_rf["test_precision"]),
-    "recall": np.mean(cv_results_rf["test_recall"]),
-    "roc_auc": np.mean(cv_results_rf["test_roc_auc"])
-}
+    metrics_rf = {
+        "accuracy": np.mean(cv_results_rf["test_accuracy"]),
+        "precision": np.mean(cv_results_rf["test_precision"]),
+        "recall": np.mean(cv_results_rf["test_recall"]),
+        "roc_auc": np.mean(cv_results_rf["test_roc_auc"])
+    }
 
-mlflow.log_param("model_type", "RandomForest")
-mlflow.log_param("n_estimators", 200)
+    mlflow.log_param("model_type", "RandomForest")
+    mlflow.log_param("n_estimators", 200)
 
-for k, v in metrics_rf.items():
-    mlflow.log_metric(k, v)
+    for k, v in metrics_rf.items():
+        mlflow.log_metric(k, v)
 
-model_rf.fit(X, y)
-mlflow.sklearn.log_model(model_rf, "Random_Forest_model")
+    model_rf.fit(X, y)
+    mlflow.sklearn.log_model(sk_model=model_rf, name="Random_Forest_model")
 mlflow.end_run()
 
 

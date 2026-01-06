@@ -1,0 +1,10 @@
+artifact_location: file:///Users/soumya/Documents/mlops/mlops-heart-disease/mlruns/481103100965708383/models/m-9b2305b47c5843969f42d92e558bb395/artifacts
+creation_timestamp: 1767678574544
+experiment_id: '481103100965708383'
+last_updated_timestamp: 1767678575647
+model_id: m-9b2305b47c5843969f42d92e558bb395
+model_type: null
+name: Random_Forest_model
+source_run_id: c9d60184e7fd42cdb46118033c3ba95a
+status: 2
+status_message: null

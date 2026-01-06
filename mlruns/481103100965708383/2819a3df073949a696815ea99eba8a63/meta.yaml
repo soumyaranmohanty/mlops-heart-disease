@@ -1,0 +1,14 @@
+artifact_uri: file:///Users/soumya/Documents/mlops/mlops-heart-disease/mlruns/481103100965708383/2819a3df073949a696815ea99eba8a63/artifacts
+end_time: 1767678574049
+entry_point_name: ''
+experiment_id: '481103100965708383'
+lifecycle_stage: active
+run_id: 2819a3df073949a696815ea99eba8a63
+run_name: Logistic_Regression
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1767678572885
+status: 3
+tags: []
+user_id: soumya

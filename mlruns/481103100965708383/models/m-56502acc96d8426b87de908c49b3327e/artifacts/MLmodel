@@ -1,4 +1,4 @@
-artifact_path: /Users/soumya/Documents/mlops/mlops-heart-disease/mlruns/1/models/m-df7154b9a61b4ccd883d4d9f01348729/artifacts
+artifact_path: file:///Users/soumya/Documents/mlops/mlops-heart-disease/mlruns/481103100965708383/models/m-56502acc96d8426b87de908c49b3327e/artifacts
 flavors:
   python_function:
     env:
@@ -14,9 +14,9 @@ flavors:
     serialization_format: cloudpickle
     sklearn_version: 1.8.0
 mlflow_version: 3.8.1
-model_id: m-df7154b9a61b4ccd883d4d9f01348729
+model_id: m-56502acc96d8426b87de908c49b3327e
 model_size_bytes: 2490
-model_uuid: m-df7154b9a61b4ccd883d4d9f01348729
+model_uuid: m-56502acc96d8426b87de908c49b3327e
 prompts: null
-run_id: bf464f4080044c48a4795c943255cab7
-utc_time_created: '2026-01-05 19:04:23.742876'
+run_id: 2819a3df073949a696815ea99eba8a63
+utc_time_created: '2026-01-06 05:49:32.925401'

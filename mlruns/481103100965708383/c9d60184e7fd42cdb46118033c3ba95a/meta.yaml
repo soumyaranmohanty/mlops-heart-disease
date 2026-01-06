@@ -1,0 +1,14 @@
+artifact_uri: file:///Users/soumya/Documents/mlops/mlops-heart-disease/mlruns/481103100965708383/c9d60184e7fd42cdb46118033c3ba95a/artifacts
+end_time: 1767678575647
+entry_point_name: ''
+experiment_id: '481103100965708383'
+lifecycle_stage: active
+run_id: c9d60184e7fd42cdb46118033c3ba95a
+run_name: Random_Forest
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1767678574049
+status: 3
+tags: []
+user_id: soumya
