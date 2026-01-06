@@ -27,7 +27,9 @@ jobs:
       - name: Run unit tests
         run: |
           pytest
-
+      - name: Clean MLflow leftovers
+        run: |
+          rm -rf mlruns mlflow.db mlflow_artifacts
       - name: Train model
         run: |
           python src/train.py

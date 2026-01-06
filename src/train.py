@@ -34,12 +34,24 @@ preprocessor = ColumnTransformer(
 )
 
 # mlflow.set_tracking_uri(f"file://{os.getcwd()}/mlruns")
+
+GITHUB_WORKSPACE = os.environ.get("GITHUB_WORKSPACE", os.getcwd())
+ARTIFACT_ROOT = f"file://{GITHUB_WORKSPACE}/mlflow_artifacts"
+
 mlflow.set_tracking_uri(f"sqlite:///mlflow.db")
 
 mlflow.end_run()
 
-mlflow.set_experiment("Heart Disease Classification")
+experiment_name = "Heart Disease Classification"
 
+
+if mlflow.get_experiment_by_name(experiment_name) is None:
+    mlflow.create_experiment(
+        name=experiment_name,
+        artifact_location=ARTIFACT_ROOT
+    )
+
+mlflow.set_experiment(experiment_name)
 
 with mlflow.start_run(run_name="Logistic_Regression"):
     
